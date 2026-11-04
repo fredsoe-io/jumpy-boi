@@ -44,3 +44,11 @@ turned off, so the result runs as plain static files on any web server.
 - Sprites, music, font and the remaining sounds:
   [Brackeys' Platformer Bundle](https://brackeysgames.itch.io/brackeys-platformer-bundle)
   (CC0). `LICENSE & CREDITS.txt` lists the individual artists.
+
+## Licence
+
+- The code is released under the [MIT licence](LICENSE).
+- The sound effects recorded by Adam & Lilli (jump, land, coin, death and the
+  slime sounds in `sounds/`) and their level designs (`scenes/levels/`) belong
+  to them and are not licensed for reuse.
+- The Brackeys assets are CC0, see `LICENSE & CREDITS.txt`.
