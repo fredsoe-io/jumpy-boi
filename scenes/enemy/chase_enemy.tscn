@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://cii4rr0k56ucu"]
+
+[ext_resource type="Script" uid="uid://cfmlc5qq7k6hh" path="res://scenes/enemy/chase_enemy.gd" id="1_x6qu0"]
+[ext_resource type="Texture2D" uid="uid://dkv2g3d7gy62u" path="res://sprites/slime_purple.png" id="1_xg8t8"]
+[ext_resource type="PackedScene" uid="uid://2sigodvscykv" path="res://scenes/killzone/kill_zone.tscn" id="2_cviac"]
+[ext_resource type="AudioStream" uid="uid://b2t0hmyga3x53" path="res://sounds/enemy_chase.wav" id="4_0lc4y"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s7jy6"]
+size = Vector2(14, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cviac"]
+atlas = ExtResource("1_xg8t8")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x6qu0"]
+atlas = ExtResource("1_xg8t8")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0lc4y"]
+atlas = ExtResource("1_xg8t8")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iownr"]
+atlas = ExtResource("1_xg8t8")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0b3le"]
+atlas = ExtResource("1_xg8t8")
+region = Rect2(72, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2hju"]
+atlas = ExtResource("1_xg8t8")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2tbfo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cviac")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x6qu0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0lc4y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iownr")
+}],
+"loop": 1,
+"name": &"chase",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0b3le")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2hju")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 2.5
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2tbfo"]
+size = Vector2(8, 10)
+
+[node name="ChaseEnemy" type="CharacterBody2D" unique_id=1580558615]
+collision_layer = 4
+script = ExtResource("1_x6qu0")
+chase_speed = 75.0
+chase_distance = 100.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=567815356]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_s7jy6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1387437145]
+sprite_frames = SubResource("SpriteFrames_2tbfo")
+animation = &"chase"
+autoplay = "idle"
+frame_progress = 0.29060242
+
+[node name="KillZone" parent="." unique_id=896964982 instance=ExtResource("2_cviac")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=422814933]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_2tbfo")
+
+[node name="ChaseSound" type="AudioStreamPlayer2D" parent="." unique_id=826168236]
+stream = ExtResource("4_0lc4y")
+volume_db = -5.0
+max_distance = 125.0
+attenuation = 2.297397

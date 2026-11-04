@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cfkfbjbhmx83l"]
+
+[ext_resource type="Script" uid="uid://b4rcmfq804wmg" path="res://scenes/texts/respawn_activated_text.gd" id="1_o3meh"]
+[ext_resource type="Theme" uid="uid://rkjta4j4pt46" path="res://themes/font_theme.tres" id="2_ff4rr"]
+
+[node name="RespawnActivatedText" type="Node2D" unique_id=1308985110]
+script = ExtResource("1_o3meh")
+
+[node name="Label" type="Label" parent="." unique_id=407824373]
+offset_left = -8.0
+offset_top = -7.0
+offset_right = 20.0
+offset_bottom = 9.0
+theme = ExtResource("2_ff4rr")
+theme_override_colors/font_color = Color(3.3691526e-07, 0.9131175, 0.19404644, 1)
+theme_override_font_sizes/font_size = 8
+text = "Checkpoint"
+horizontal_alignment = 1

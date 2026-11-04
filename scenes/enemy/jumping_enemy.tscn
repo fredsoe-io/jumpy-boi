@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://bjima7e8rh05e"]
+
+[ext_resource type="Script" uid="uid://cgmb24rs3wmmx" path="res://scenes/enemy/jumping_enemy.gd" id="1_j0x0w"]
+[ext_resource type="Texture2D" uid="uid://bnpstpeuale1u" path="res://sprites/slime_green.png" id="1_nsmis"]
+[ext_resource type="PackedScene" uid="uid://2sigodvscykv" path="res://scenes/killzone/kill_zone.tscn" id="2_wya0t"]
+[ext_resource type="Shader" uid="uid://bey52etfxp6jt" path="res://shaders/new_shader.gdshader" id="4_hue"]
+[ext_resource type="AudioStream" uid="uid://t8yiukdrx3jn" path="res://sounds/enemy_jump.wav" id="5_3tioi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hue"]
+resource_local_to_scene = true
+shader = ExtResource("4_hue")
+shader_parameter/hue_shift = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wya0t"]
+atlas = ExtResource("1_nsmis")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0x0w"]
+atlas = ExtResource("1_nsmis")
+region = Rect2(24, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gho62"]
+atlas = ExtResource("1_nsmis")
+region = Rect2(48, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3tioi"]
+atlas = ExtResource("1_nsmis")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wlgvi"]
+atlas = ExtResource("1_nsmis")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2tbfo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wya0t")
+}],
+"loop": 1,
+"name": &"air",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0x0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gho62")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3tioi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wlgvi")
+}],
+"loop": 1,
+"name": &"ground",
+"speed": 4.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2tbfo"]
+size = Vector2(12, 12)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7mva"]
+size = Vector2(12, 12)
+
+[node name="JumpingEnemy" type="CharacterBody2D" unique_id=1164817182]
+collision_layer = 4
+script = ExtResource("1_j0x0w")
+hue_shift = 0.3500000000000001
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1409827798]
+material = SubResource("ShaderMaterial_hue")
+sprite_frames = SubResource("SpriteFrames_2tbfo")
+animation = &"ground"
+frame_progress = 0.53538585
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1757985295]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_2tbfo")
+
+[node name="KillZone" parent="." unique_id=896964982 instance=ExtResource("2_wya0t")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=796165385]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_e7mva")
+
+[node name="JumpTimer" type="Timer" parent="." unique_id=578339155]
+one_shot = true
+
+[node name="JumpPlayer" type="AudioStreamPlayer2D" parent="." unique_id=607568749]
+stream = ExtResource("5_3tioi")
+max_distance = 150.0
+
+[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
