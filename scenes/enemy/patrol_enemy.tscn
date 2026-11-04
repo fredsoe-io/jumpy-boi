@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://bsl6bnu17hjna"]
+
+[ext_resource type="Texture2D" uid="uid://bnpstpeuale1u" path="res://sprites/slime_green.png" id="1_a3pup"]
+[ext_resource type="PackedScene" uid="uid://2sigodvscykv" path="res://scenes/killzone/kill_zone.tscn" id="2_40wdo"]
+[ext_resource type="Script" uid="uid://brri7pchi6sme" path="res://scenes/enemy/patrol_enemy.gd" id="2_enemy"]
+[ext_resource type="AudioStream" uid="uid://b4yy44v6d8b7k" path="res://sounds/enemy_move.wav" id="4_tjssy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjssy"]
+atlas = ExtResource("1_a3pup")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gl05p"]
+atlas = ExtResource("1_a3pup")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cwlon"]
+atlas = ExtResource("1_a3pup")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nbhyu"]
+atlas = ExtResource("1_a3pup")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2tbfo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjssy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gl05p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cwlon")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nbhyu")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2tbfo"]
+size = Vector2(8.5, 12)
+
+[node name="Enemy" type="Node2D" unique_id=678796726]
+script = ExtResource("2_enemy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1376681272]
+sprite_frames = SubResource("SpriteFrames_2tbfo")
+autoplay = "default"
+frame_progress = 0.0564027
+
+[node name="KillZone" parent="." unique_id=896964982 instance=ExtResource("2_40wdo")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=53622792]
+position = Vector2(0, 5)
+shape = SubResource("RectangleShape2D_2tbfo")
+
+[node name="RaycastRight" type="RayCast2D" parent="." unique_id=762038757]
+position = Vector2(0, 5)
+target_position = Vector2(9, 0)
+
+[node name="RaycastLeft" type="RayCast2D" parent="." unique_id=1272768994]
+position = Vector2(0, 5)
+target_position = Vector2(-9, 0)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1391877079]
+stream = ExtResource("4_tjssy")
+autoplay = true
+max_distance = 150.0

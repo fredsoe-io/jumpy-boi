@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b5x1o6jq5lite"]
+
+[ext_resource type="Texture2D" uid="uid://c7fe67ph78t30" path="res://sprites/knight.png" id="1_btqs8"]
+[ext_resource type="Script" uid="uid://b0y811u47yuos" path="res://scenes/healthbar/healthbar.gd" id="1_c2bhi"]
+
+[node name="Healthbar" type="Node2D" unique_id=212278405]
+script = ExtResource("1_c2bhi")
+
+[node name="Life" type="Sprite2D" parent="." unique_id=119801182]
+position = Vector2(23, 29)
+texture = ExtResource("1_btqs8")
+region_enabled = true
+region_rect = Rect2(38, 10, 18, 18)

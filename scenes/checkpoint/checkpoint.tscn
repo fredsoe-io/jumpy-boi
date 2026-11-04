@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://74vsjkqjmnr6"]
+
+[ext_resource type="Script" uid="uid://lbwhrd1w1piq" path="res://scenes/checkpoint/checkpoint.gd" id="1_qopk8"]
+[ext_resource type="Texture2D" uid="uid://3jfrjmx1yqkj" path="res://sprites/world_tileset.png" id="1_w77t2"]
+[ext_resource type="Shader" uid="uid://ceb6jwsr1e5e8" path="res://scenes/checkpoint/checkpoint_dim.gdshader" id="2_2kgby"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qopk8"]
+shader = ExtResource("2_2kgby")
+shader_parameter/active = false
+shader_parameter/brightness = 0.5
+shader_parameter/saturation = 0.3
+
+[sub_resource type="Gradient" id="Gradient_5vuvm"]
+offsets = PackedFloat32Array(0, 0.6648501)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w77t2"]
+gradient = SubResource("Gradient_5vuvm")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e7mva"]
+size = Vector2(16, 16)
+
+[node name="Checkpoint" type="Node2D" unique_id=374599798]
+script = ExtResource("1_qopk8")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=294969031]
+material = SubResource("ShaderMaterial_qopk8")
+texture = ExtResource("1_w77t2")
+region_enabled = true
+region_rect = Rect2(112, 96, 16, 16)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1689691341]
+visible = false
+color = Color(0.8552743, 0.9172525, 0.33290333, 1)
+energy = 0.25
+texture = SubResource("GradientTexture2D_w77t2")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2057788787]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=356044995]
+shape = SubResource("RectangleShape2D_e7mva")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_checkpoint_entered"]
